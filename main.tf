@@ -14,15 +14,4 @@ resource "google_storage_bucket" "static-site" {
     not_found_page   = var.not_found_page
   }
 }
-# CREATE BUCKET DEFAULT OBJECT ACL
-resource "google_storage_default_object_acl" "bucket-acl" {
-  bucket      = google_storage_bucket.static-site.name
-  role_entity = var.role_entity
-}
 
-# Create the index.html in the bucket
-resource "google_storage_bucket_object" "index" {
-  name   = "index.html"
-  source = "src/index.html"
-  bucket = google_storage_bucket.static-site.name
-}
